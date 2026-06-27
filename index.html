@@ -711,8 +711,22 @@
                 if (item.Soal) {
                     let soalTeks = String(item.Soal);
                     // Solusi Sederhana: Mengganti semua pindah baris (\n\n, \n, dll) menjadi <br> (Perbaikan Tata Letak - Screenshot 21.11.15)
-                    soalTeks = soalTeks.replace(/[\r\n]+/g, '<br>');
-                    // Ganti text-justify menjadi text-left agar teks lebih rapi
+                    if (item.Soal) {
+                    let soalTeks = String(item.Soal);
+                    
+                    // Bersihkan karakter kembalian carriage (\r) terlebih dahulu
+                    soalTeks = soalTeks.replace(/\r/g, "");
+                    
+                    // Logika Cerdas: 
+                    // 1. Jika ada 2 enter atau lebih (\n\n), tandai dulu sebagai PARAGRAF
+                    soalTeks = soalTeks.replace(/\n{2,}/g, "[PARAGRAF_BARU]");
+                    
+                    // 2. Jika hanya ada 1 enter (\n), ubah menjadi SPASI biasa agar teks menyambung ke samping
+                    soalTeks = soalTeks.replace(/\n/g, " ");
+                    
+                    // 3. Kembalikan tanda PARAGRAF menjadi tag break HTML double (<br><br>)
+                    soalTeks = soalTeks.replace(/\[PARAGRAF_BARU\]/g, "<br><br>");
+                    
                     teksSoalTampil += `<div class="text-left">${soalTeks}</div>`;
                 }
 
