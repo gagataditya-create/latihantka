@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi CBT TKA SMP</title>
     
-    <!-- PWA Meta Tags & Favicon -->
     <meta name="theme-color" content="#2870b4">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,7 +14,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Font Khas Sismendik -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Custom scrollbar for better look */
@@ -175,7 +173,6 @@
         }
     </style>
 
-    <!-- Mesin Rumus Matematika (MathJax) -->
     <script>
         window.MathJax = {
             tex: {
@@ -189,9 +186,7 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col select-none" style="font-family: 'Montserrat', sans-serif;">
 
-    <!-- LAYAR 1: LOGIN PESERTA (Pos Satpam) -->
     <div id="layarLogin" class="flex-1 flex flex-col min-h-screen bg-sismendik-dots relative">
-        <!-- Header Bar Polos Centered -->
         <div class="w-full bg-[#2870b4] flex justify-center items-center py-6 shadow-md relative z-20">
             <div class="flex items-center gap-4 text-white">
                 <img src="simulasitka.png" alt="Logo" class="w-12 h-12 md:w-14 md:h-14 object-contain" onerror="this.style.display='none';">
@@ -203,10 +198,8 @@
         </div>
 
         <div class="flex-1 flex flex-col justify-center items-center p-4 relative z-10 mt-4 md:mt-8">
-            <!-- Box Popup diberi Animasi Drop Down -->
             <div class="bg-white p-8 md:p-10 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] max-w-md w-full border border-gray-100 animate-drop-down">
                 
-                <!-- Icon Toga Animasi Naik Turun -->
                 <div class="w-20 h-20 bg-[#2870b4] rounded-full mx-auto flex items-center justify-center animate-float-toga mb-6 shadow-md border-4 border-white ring-4 ring-blue-50">
                     <i class="fas fa-graduation-cap text-white text-3xl"></i>
                 </div>
@@ -231,7 +224,6 @@
                         <input type="text" id="inputSekolah" class="w-full border border-gray-300 rounded px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors text-gray-800 font-medium text-sm" placeholder="Ketik asal sekolah...">
                     </div>
 
-                    <!-- Pilihan Jenjang Pendidikan -->
                     <div>
                         <label class="flex items-center gap-2 text-sm font-bold text-gray-700 mb-2">
                             <i class="fas fa-layer-group text-blue-600"></i> Jenjang Pendidikan:
@@ -268,7 +260,6 @@
                         <i class="fas fa-play text-xs"></i> Mulai Simulasi
                     </button>
 
-                    <!-- Tombol Install PWA -->
                     <button id="btnInstallPwa" onclick="installPWA()" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-transform hover:scale-[1.02] mt-3 justify-center items-center gap-2 text-sm md:text-base shadow-md border border-green-700">
                         <i class="fas fa-mobile-alt"></i> Install Aplikasi di HP
                     </button>
@@ -281,11 +272,8 @@
         </div>
     </div>
 
-    <!-- LAYAR 2: SELAMAT DATANG (Login Ujian) -->
     <div id="layarWelcome" class="hidden flex-1 flex-col w-full relative min-h-screen bg-gray-50">
-        <!-- Top Half Blue Motif -->
         <div class="absolute top-0 left-0 w-full h-[25vh] md:h-[30vh] bg-sismendik-motif z-0 shadow-md">
-            <!-- Header Bar -->
             <div class="w-full flex items-center p-5 md:p-8 gap-4 relative z-10 text-white">
                 <img src="simulasitka.png" alt="Logo" class="w-12 h-12 md:w-14 md:h-14 object-contain" onerror="this.style.display='none';">
                 <div>
@@ -295,14 +283,12 @@
             </div>
         </div>
 
-        <!-- Center Card dengan animasi -->
         <div class="flex-1 flex flex-col justify-center items-center p-4 relative z-10 mt-20 md:mt-16">
             <div class="bg-white p-8 md:p-10 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] max-w-md w-full border border-gray-100 animate-drop-down">
                 <h2 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-2">Selamat Datang</h2>
                 <p class="text-gray-500 text-xs md:text-sm mb-8 leading-relaxed">Silakan login dengan memastikan data diri dan mata pelajaran di bawah ini sudah sesuai.</p>
                 
                 <div class="space-y-4 mb-8">
-                    <!-- Data Display -->
                     <div class="flex items-center gap-4 px-2">
                         <i class="fas fa-user-circle text-gray-600 text-lg w-6 text-center"></i>
                         <div class="border-b border-gray-200 pb-1 w-full text-gray-800 font-bold text-sm" id="welcomeNama">-</div>
@@ -324,11 +310,8 @@
         </div>
     </div>
 
-    <!-- LAYAR 3: KONFIRMASI DATA & TOKEN -->
     <div id="layarKonfirmasi" class="hidden flex-1 flex-col w-full relative min-h-screen bg-gray-50">
-        <!-- Top Half Blue Motif -->
         <div class="absolute top-0 left-0 w-full h-[25vh] md:h-[30vh] bg-sismendik-motif z-0 shadow-md">
-            <!-- Header Bar -->
             <div class="w-full flex justify-between items-center p-5 md:px-8 md:py-6 relative z-10 text-white">
                 <div class="flex items-center gap-4">
                     <img src="simulasitka.png" alt="Logo" class="w-12 h-12 md:w-14 md:h-14 object-contain" onerror="this.style.display='none';">
@@ -337,7 +320,6 @@
                         <p class="text-[10px] md:text-[11px] opacity-90 uppercase">Aplikasi ANBK</p>
                     </div>
                 </div>
-                <!-- Informasi User di Kanan Atas -->
                 <div class="hidden md:flex items-center gap-3 text-sm opacity-90">
                     <span id="headerKonfirmIdentitas" class="tracking-wide">P000000000 - PESERTA TKA</span>
                     <i class="fas fa-graduation-cap text-xl bg-white/20 p-2 rounded"></i>
@@ -345,10 +327,8 @@
             </div>
         </div>
 
-        <!-- Center Layout: Token (Kiri) & Form (Kanan) -->
         <div class="flex-1 flex flex-col md:flex-row justify-center md:items-start items-center p-4 relative z-10 mt-16 md:mt-10 gap-6 max-w-5xl mx-auto w-full">
             
-            <!-- Left Side: Token Box Container -->
             <div id="containerAsliToken" class="w-full md:w-auto md:min-w-[300px] sticky top-4 z-[60]">
                 <div id="boxTokenMain" class="bg-white p-5 rounded-lg shadow-md w-full flex items-center justify-between border border-gray-100 animate-drop-down transition-all duration-300" style="animation-delay: 0.1s; opacity: 0;">
                     <div class="text-sm font-medium text-gray-700">Token : <span id="displayToken" class="font-bold tracking-widest text-gray-900 ml-1">XXXXXX</span></div>
@@ -356,24 +336,20 @@
                 </div>
             </div>
 
-            <!-- Right Side: Form Konfirmasi -->
             <div class="bg-white p-6 md:p-8 rounded-lg shadow-[0_10px_30px_-15px_rgba(0,0,0,0.3)] w-full max-w-md border border-gray-100 bg-watermark animate-drop-down">
                 <h2 class="text-xl md:text-2xl font-medium text-gray-800 mb-6 border-b border-gray-100 pb-4">Konfirmasi data Peserta</h2>
                 
                 <div class="space-y-4">
-                    <!-- Kode Unik -->
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wide">Kode Unik</label>
                         <div class="border-b border-gray-200 pb-1 mt-1 text-sm text-gray-800 font-medium" id="konfirmNik">P000000000</div>
                     </div>
                     
-                    <!-- Nama Peserta Readonly -->
                     <div id="blokNamaPeserta" class="relative">
                         <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wide">Nama Peserta</label>
                         <div class="border-b border-gray-200 pb-1 mt-1 text-sm text-gray-800 font-medium" id="konfirmNamaLengkap">P000000000 - PESERTA TKA</div>
                     </div>
                     
-                    <!-- Jenis Kelamin -->
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wide">Jenis Kelamin</label>
                         <select class="input-konfirm mt-1 appearance-none bg-transparent cursor-pointer font-medium hover:bg-gray-50 transition-colors">
@@ -382,13 +358,11 @@
                         </select>
                     </div>
 
-                    <!-- Mata Ujian -->
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wide">Mata Ujian</label>
                         <div class="border-b border-gray-200 pb-1 mt-1 text-sm text-gray-800 font-medium" id="konfirmMapel">-</div>
                     </div>
 
-                    <!-- Tanggal Lahir -->
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wide mb-1">Tanggal Lahir</label>
                         <div class="flex gap-2">
@@ -413,7 +387,6 @@
                         </div>
                     </div>
 
-                    <!-- Token Input -->
                     <div class="pt-2">
                         <label class="block text-[10px] font-bold text-[#007bff] uppercase tracking-wide">Token</label>
                         <input type="text" id="konfirmInputToken" class="input-konfirm mt-1 font-bold uppercase tracking-widest text-base" placeholder="Ketikkan token di sini" autocomplete="off">
@@ -429,7 +402,6 @@
         </div>
     </div>
 
-    <!-- HEADER (Fixed) UNTUK LAYAR UJIAN -->
     <header id="headerUjian" class="hidden bg-sismendik-motif text-white p-3 md:px-6 md:py-4 flex justify-between items-center shadow-md sticky top-0 z-50">
         <div class="flex items-center gap-4 relative z-10">
             <img src="simulasitka.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain" onerror="this.style.display='none';">
@@ -447,16 +419,11 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
-    <!-- Tambahkan pb-24 agar konten tidak tertutup footer (Screenshot 21.11.31) -->
     <main id="mainUjian" class="hidden flex-1 flex-col md:flex-row w-full max-w-7xl mx-auto p-4 gap-4 pb-24 md:pb-4">
         
-        <!-- Left Column: Question Area -->
         <div class="flex-1 bg-white shadow-md rounded-md overflow-hidden flex flex-col border border-gray-200">
             
-            <!-- Question Header Tool -->
             <div class="bg-white border-b p-4 md:px-6 md:py-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm relative z-20">
-                <!-- Sisi Kiri -->
                 <div class="flex flex-col gap-3">
                     <div class="flex items-center gap-3">
                         <div class="text-xl md:text-2xl font-medium text-gray-800">Soal nomor <span id="soalNumber" class="font-semibold">1</span></div>
@@ -470,10 +437,8 @@
                     </div>
                 </div>
                 
-                <!-- Sisi Kanan -->
                 <div class="flex items-center gap-3 w-full md:w-auto justify-end">
                     <button class="bg-[#007bff] hover:bg-blue-700 text-white px-5 py-2 rounded-full text-xs font-bold transition-transform hover:scale-105 shadow-sm tracking-wide whitespace-nowrap">INFORMASI SOAL</button>
-                    <!-- Timer Box -->
                     <div class="bg-white border border-gray-400 px-4 py-2 rounded-full shadow-sm flex items-center gap-2 min-w-[160px] justify-center transition-colors">
                         <span class="text-xs font-medium text-gray-600">Sisa Waktu :</span>
                         <span id="timerDisplay" class="font-bold text-gray-800 text-sm tracking-wide">01:30:00</span>
@@ -481,13 +446,10 @@
                 </div>
             </div>
 
-            <!-- Question Text & Options -->
             <div id="questionContainer" class="p-6 overflow-y-auto flex-1 text-base leading-relaxed text-gray-800">
-                <!-- Content injected via JS (dengan animasi masuk fade in) -->
-            </div>
+                </div>
         </div>
 
-        <!-- Right Column: Daftar Soal -->
         <div id="panelDaftarSoal" class="hidden md:flex w-full md:w-72 bg-white shadow-md rounded-md flex-col border border-gray-200">
             <div class="bg-[#4384bd] border-b p-3 font-bold text-center text-white flex justify-between items-center">
                 <span>Daftar Soal</span>
@@ -495,8 +457,7 @@
             </div>
             <div class="p-4 overflow-y-auto">
                 <div id="gridDaftarSoal" class="grid grid-cols-5 gap-2">
-                    <!-- Grid injected via JS -->
-                </div>
+                    </div>
             </div>
             <div class="mt-auto p-3 border-t bg-gray-50 text-xs text-gray-600 flex flex-col gap-1">
                 <div class="flex items-center gap-2"><div class="w-3 h-3 bg-white border border-gray-400 rounded-sm"></div> Belum Dijawab</div>
@@ -506,7 +467,6 @@
         </div>
     </main>
 
-    <!-- FOOTER NAVIGATION -->
     <footer id="footerUjian" class="hidden bg-white border-t p-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] fixed bottom-0 w-full z-40">
         <div class="max-w-7xl mx-auto flex justify-between items-center px-2">
             <button id="btnPrev" class="bg-red-600 hover:bg-red-700 text-white px-4 md:px-6 py-2.5 rounded font-semibold text-sm md:text-base flex items-center gap-2 transition-transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-sm">
@@ -527,7 +487,6 @@
         </div>
     </footer>
 
-    <!-- Overlay Transisi Survei -->
     <div id="modalTransisiSurvei" class="fixed inset-0 bg-black bg-opacity-80 hidden justify-center items-center z-[80] animate-fade-in">
         <div class="bg-white p-8 rounded-xl shadow-xl max-w-lg w-full mx-4 text-center animate-drop-down border-t-4 border-[#007bff]">
             <i class="fas fa-info-circle text-5xl text-[#007bff] mb-4"></i>
@@ -544,7 +503,6 @@
         </div>
     </div>
 
-    <!-- Overlay Konfirmasi Selesai -->
     <div id="modalSelesai" class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center z-[60] animate-fade-in">
         <div class="bg-white p-6 rounded-xl shadow-xl max-w-sm w-full mx-4 animate-drop-down">
             <h2 class="text-xl font-bold mb-4 border-b pb-2 text-gray-800">Konfirmasi Selesai</h2>
@@ -556,7 +514,6 @@
         </div>
     </div>
 
-    <!-- Papan Skor Sementara -->
     <div id="modalSkor" class="fixed inset-0 bg-black bg-opacity-80 hidden justify-center items-center z-[70] animate-fade-in">
         <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full mx-4 text-center animate-drop-down">
             <i class="fas fa-check-circle text-6xl text-green-500 mb-4 animate-bounce"></i>
@@ -576,7 +533,6 @@
         </div>
     </div>
 
-    <!-- Layar Loading -->
     <div id="modalLoading" class="hidden fixed inset-0 bg-gray-50 z-[100] flex-col justify-center items-center transition-opacity duration-500">
         <i class="fas fa-circle-notch fa-spin text-6xl text-[#007bff] mb-6"></i>
         <h2 class="text-2xl font-extrabold text-gray-800">Menyiapkan Ruang Ujian...</h2>
@@ -815,7 +771,7 @@
         }
 
         // --- Fungsi Robust: Ambil soal berdasarkan tab, tutupi kekurangan level ---
-        async function ambilSoalDuaLevel(arrayMentah, totalButuh) {
+        function ambilBerdasarkanKesulitan(arrayMentah, butuhMudah, butuhSedang, butuhSulit) {
             let sedang = [], sulit = [];
             
             arrayMentah.forEach(item => {
@@ -824,16 +780,19 @@
                 else if (diff === 'sulit') sulit.push(item);
             });
 
-            // Target perbandingan 50:50
-            const butuhSedang = Math.ceil(totalButuh * 0.5);
-            const butuhSulit = totalButuh - butuhSedang;
+            // Menghitung total kebutuhan soal dari parameter yang ada
+            let totalButuh = butuhMudah + butuhSedang + butuhSulit;
+            
+            // Mengubah logika menjadi 50% Sedang dan 50% Sulit
+            let targetSedang = Math.ceil(totalButuh * 0.5);
+            let targetSulit = totalButuh - targetSedang;
 
-            acakSoal(sedang); 
+            acakSoal(sedang);
             acakSoal(sulit);
 
             let drafPasti = [];
-            drafPasti = [...drafPasti, ...sedang.splice(0, butuhSedang)];
-            drafPasti = [...drafPasti, ...sulit.splice(0, butuhSulit)];
+            drafPasti = [...drafPasti, ...sedang.splice(0, targetSedang)];
+            drafPasti = [...drafPasti, ...sulit.splice(0, targetSulit)];
 
             // Tambal otomatis jika stok salah satu level di Sheet kurang
             if (drafPasti.length < totalButuh) {
@@ -931,10 +890,10 @@
                 // Aturan Sulingjar: 10 soal
 
                 const [paketPG, paketMCMA, paketPGK, paketSurvei] = await Promise.all([
-                    ambilSoalCerdas(mentahPG, 2, 8, 8), // PG Mapel
-                    ambilSoalCerdas(mentahMCMA, 1, 3, 2), // MCMA Mapel
-                    ambilSoalCerdas(mentahPGK, 1, 3, 2), // PGK Mapel
-                    ambilSoalCerdas(mentahSurvei, 2, 4, 4) // Sulingjar
+                    ambilBerdasarkanKesulitan(mentahPG, 2, 8, 8), // PG Mapel
+                    ambilBerdasarkanKesulitan(mentahMCMA, 1, 3, 2), // MCMA Mapel
+                    ambilBerdasarkanKesulitan(mentahPGK, 1, 3, 2), // PGK Mapel
+                    ambilBerdasarkanKesulitan(mentahSurvei, 2, 4, 4) // Sulingjar
                 ]);
 
                 const formatPG = formatDataSheet(paketPG, 'PG');
