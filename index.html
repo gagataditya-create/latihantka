@@ -815,36 +815,34 @@
         }
 
         // --- Fungsi Robust: Ambil soal berdasarkan tab, tutupi kekurangan level ---
-        async function ambilSoalCerdas(mentah, butuhMudah, butuhSedang, butuhSulit) {
-            if (!mentah || mentah.length === 0) return [];
-
-            let mudah = [], sedang = [], sulit = [];
-            mentah.forEach(item => {
+        async function ambilSoalDuaLevel(arrayMentah, totalButuh) {
+            let sedang = [], sulit = [];
+            
+            arrayMentah.forEach(item => {
                 let diff = (item.Kesulitan || item.Tingkat_Kesulitan || item.Level || '').toString().toLowerCase().trim();
-                if (diff === 'mudah') mudah.push(item);
-                else if (diff === 'sedang') sedang.push(item);
+                if (diff === 'sedang') sedang.push(item);
                 else if (diff === 'sulit') sulit.push(item);
             });
 
-            // Acak stok untuk memastikan drafnya acak
-            acakSoal(mudah); acakSoal(sedang); acakSoal(sulit);
+            // Target perbandingan 50:50
+            const butuhSedang = Math.ceil(totalButuh * 0.5);
+            const butuhSulit = totalButuh - butuhSedang;
+
+            acakSoal(sedang); 
+            acakSoal(sulit);
 
             let drafPasti = [];
-
-            // Ambil soal Mudah, Sedang, Sulit (stok level yang ada)
-            drafPasti = [...drafPasti, ...mudah.splice(0, butuhMudah)];
             drafPasti = [...drafPasti, ...sedang.splice(0, butuhSedang)];
             drafPasti = [...drafPasti, ...sulit.splice(0, butuhSulit)];
 
-            let totalButuh = butuhMudah + butuhSedang + butuhSulit;
-            let sisaButuh = totalButuh - drafPasti.length;
-
-            // Jika total stok di tab ini kurang, aplikasi akan gagal (ini benar)
+            // Tambal otomatis jika stok salah satu level di Sheet kurang
             if (drafPasti.length < totalButuh) {
-                throw new Error(`Kekurangan soal pada tab ini. Total butuh: ${totalButuh}, stok tersedia: ${drafPasti.length}. Mohon lengkapi soal level apa saja di tab ini.`);
+                let sisaButuh = totalButuh - drafPasti.length;
+                let sisaStok = [...sedang, ...sulit];
+                drafPasti = [...drafPasti, ...sisaStok.splice(0, sisaButuh)];
             }
 
-            return drafPasti; // Kembalikan draf (tanpa diacak lagi agar level tetap terkelompok)
+            return acakSoal(drafPasti);
         }
 
         async function mulaiUjian(mataUjian) {
