@@ -848,23 +848,24 @@
                     const data = await response.json();
                     if (!data) return [];
                     
-                    // Konversi Object JSON bersarang dari Firebase menjadi Array of Objects
-                    // Sekaligus menyesuaikan key huruf kecil menjadi huruf besar agar cocok dengan sistem formatDataSheet lama
-                    return Object.keys(data).map(key => {
-                        const item = data[key];
-                        return {
-                            No: key,
-                            Level: item.level,
-                            Kesulitan: item.level, 
-                            Gambar: item.gambar,
-                            Soal: item.soal,
-                            Opsi_A: item.opsi_a,
-                            Opsi_B: item.opsi_b,
-                            Opsi_C: item.opsi_c,
-                            Opsi_D: item.opsi_d,
-                            Kunci: item.kunci
-                        };
-                    });
+                    // Konversi Object JSON, ditambah FILTER untuk membuang rak kosong (null) bentukan Firebase
+                    return Object.keys(data)
+                        .filter(key => data[key] !== null) // <-- INI PENYARINGNYA
+                        .map(key => {
+                            const item = data[key];
+                            return {
+                                No: key,
+                                Level: item.level || "",
+                                Kesulitan: item.level || "", 
+                                Gambar: item.gambar || "",
+                                Soal: item.soal || "",
+                                Opsi_A: item.opsi_a || "",
+                                Opsi_B: item.opsi_b || "",
+                                Opsi_C: item.opsi_c || "",
+                                Opsi_D: item.opsi_d || "",
+                                Kunci: item.kunci || ""
+                            };
+                        });
                 };
 
                 let mentahPG = [], mentahMCMA = [], mentahPGK = [];
