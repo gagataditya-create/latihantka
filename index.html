@@ -712,6 +712,9 @@
                 if (item.Soal) {
                     let soalTeks = String(item.Soal);
                     
+                    // SABUK PENGAMAN LaTeX: Paksa ubah double dollar ($$) menjadi single dollar ($)
+                    soalTeks = soalTeks.replace(/\$\$/g, "$");
+                    
                     // Bersihkan karakter kembalian carriage (\r) terlebih dahulu
                     soalTeks = soalTeks.replace(/\r/g, "");
                     
@@ -729,10 +732,11 @@
                 }
 
                 let opsiArr = [];
-                if(item.Opsi_A !== undefined) opsiArr.push(item.Opsi_A);
-                if(item.Opsi_B !== undefined) opsiArr.push(item.Opsi_B);
-                if(item.Opsi_C !== undefined) opsiArr.push(item.Opsi_C);
-                if(item.Opsi_D !== undefined) opsiArr.push(item.Opsi_D);
+                // Terapkan SABUK PENGAMAN LaTeX juga pada seluruh opsi jawaban
+                if(item.Opsi_A !== undefined) opsiArr.push(String(item.Opsi_A).replace(/\$\$/g, "$"));
+                if(item.Opsi_B !== undefined) opsiArr.push(String(item.Opsi_B).replace(/\$\$/g, "$"));
+                if(item.Opsi_C !== undefined) opsiArr.push(String(item.Opsi_C).replace(/\$\$/g, "$"));
+                if(item.Opsi_D !== undefined) opsiArr.push(String(item.Opsi_D).replace(/\$\$/g, "$"));
 
                 let jwbSiswaDefault = null;
                 let jwbBenar = null;
