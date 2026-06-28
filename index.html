@@ -171,6 +171,11 @@
         .animate-float-toga {
             animation: floatToga 3s ease-in-out infinite;
         }
+
+        /* PERBAIKAN LATEX: Mencegah Tailwind memotong baris rumus menjadi enter */
+        mjx-container svg {
+            display: inline !important;
+        }
     </style>
 
     <script>
