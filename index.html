@@ -709,34 +709,39 @@
                     teksSoalTampil += `<img src="${item.Gambar}" class="max-w-full h-auto mb-4 rounded shadow-sm border border-gray-200" alt="Gambar Ilustrasi">`;
                 }
                 
+                // --- MESIN PELUMAT ENTER & MATH BLOCK ---
+                const libasFormatBandel = (teks) => {
+                    if(teks === undefined || teks === null) return "";
+                    let str = String(teks);
+                    
+                    // 1. Libas Display Math ( \[ dan \] ) atau ( $$ ) jadi Inline Math ( $ )
+                    str = str.replace(/\\\[/g, "$").replace(/\\\]/g, "$");
+                    str = str.replace(/\\\(/g, "$").replace(/\\\)/g, "$");
+                    str = str.replace(/\$\$/g, "$");
+                    
+                    // 2. Libas <br> nyasar yang ditaruh AI tepat di sebelum/sesudah tanda $
+                    str = str.replace(/(<br\s*\/?>\s*)+(?=\$)/gi, " "); 
+                    str = str.replace(/(?<=\$)\s*(<br\s*\/?>\s*)+/gi, " ");
+                    
+                    // 3. Logika Cerdas Paragraf (Ubah \n tunggal jadi spasi)
+                    str = str.replace(/\r/g, "");
+                    str = str.replace(/\n{2,}/g, "[PARAGRAF_BARU]");
+                    str = str.replace(/\n/g, " ");
+                    str = str.replace(/\[PARAGRAF_BARU\]/g, "<br><br>");
+                    
+                    return str;
+                };
+
                 if (item.Soal) {
-                    let soalTeks = String(item.Soal);
-                    
-                    // SABUK PENGAMAN LaTeX: Paksa ubah double dollar ($$) menjadi single dollar ($)
-                    soalTeks = soalTeks.replace(/\$\$/g, "$");
-                    
-                    // Bersihkan karakter kembalian carriage (\r) terlebih dahulu
-                    soalTeks = soalTeks.replace(/\r/g, "");
-                    
-                    // Logika Cerdas: 
-                    // 1. Jika ada 2 enter atau lebih (\n\n), tandai dulu sebagai PARAGRAF
-                    soalTeks = soalTeks.replace(/\n{2,}/g, "[PARAGRAF_BARU]");
-                    
-                    // 2. Jika hanya ada 1 enter (\n), ubah menjadi SPASI biasa agar teks menyambung ke samping
-                    soalTeks = soalTeks.replace(/\n/g, " ");
-                    
-                    // 3. Kembalikan tanda PARAGRAF menjadi tag break HTML double (<br><br>)
-                    soalTeks = soalTeks.replace(/\[PARAGRAF_BARU\]/g, "<br><br>");
-                    
+                    let soalTeks = libasFormatBandel(item.Soal);
                     teksSoalTampil += `<div class="text-left">${soalTeks}</div>`;
                 }
 
                 let opsiArr = [];
-                // Terapkan SABUK PENGAMAN LaTeX juga pada seluruh opsi jawaban
-                if(item.Opsi_A !== undefined) opsiArr.push(String(item.Opsi_A).replace(/\$\$/g, "$"));
-                if(item.Opsi_B !== undefined) opsiArr.push(String(item.Opsi_B).replace(/\$\$/g, "$"));
-                if(item.Opsi_C !== undefined) opsiArr.push(String(item.Opsi_C).replace(/\$\$/g, "$"));
-                if(item.Opsi_D !== undefined) opsiArr.push(String(item.Opsi_D).replace(/\$\$/g, "$"));
+                if(item.Opsi_A !== undefined) opsiArr.push(libasFormatBandel(item.Opsi_A));
+                if(item.Opsi_B !== undefined) opsiArr.push(libasFormatBandel(item.Opsi_B));
+                if(item.Opsi_C !== undefined) opsiArr.push(libasFormatBandel(item.Opsi_C));
+                if(item.Opsi_D !== undefined) opsiArr.push(libasFormatBandel(item.Opsi_D));
 
                 let jwbSiswaDefault = null;
                 let jwbBenar = null;
