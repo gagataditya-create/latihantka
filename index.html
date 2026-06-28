@@ -709,7 +709,7 @@
                     teksSoalTampil += `<img src="${item.Gambar}" class="max-w-full h-auto mb-4 rounded shadow-sm border border-gray-200" alt="Gambar Ilustrasi">`;
                 }
                 
-                // --- MESIN PELUMAT ENTER & MATH BLOCK ---
+                // --- MESIN PELUMAT ENTER & MATH BLOCK (VERSI SUPER KETAT) ---
                 const libasFormatBandel = (teks) => {
                     if(teks === undefined || teks === null) return "";
                     let str = String(teks);
@@ -736,6 +736,11 @@
                     // Rapikan spasi ganda yang mungkin tertinggal
                     str = str.replace(/\s{2,}/g, " ");
                     
+                    // Rapikan isi rumus LaTeX agar tidak ada enter di dalam $...$
+                    str = str.replace(/\$([\s\S]*?)\$/g, (_, isi) => {
+                        return "$" + isi.replace(/\s+/g, " ").trim() + "$";
+                    });
+
                     return str.trim();
                 };
 
